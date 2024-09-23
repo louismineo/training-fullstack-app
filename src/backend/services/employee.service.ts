@@ -3,7 +3,7 @@ import { employeeDefSchema,EmployeeRequest } from '../types/employee.model'
 import {ErrorHandler, LogicError, LogicErrorEnum,} from '../errors/employee.errors';
 
 
-const {Employee} = require('../../models');
+const {Employee} = require('../../database/models');
 
 export async function GetAllEmployeesFromDB() : Promise<any>
 {

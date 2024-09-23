@@ -1,10 +1,10 @@
 // express stuff
 import express,{ Request, Response, NextFunction} from 'express'
-import router from './routes/employee.route'
+import router from './backend/routes/employee.route'
 import { urlencoded } from 'body-parser';
 
 // run and init the database connection
-const {sequelize} = require('../models')
+const {sequelize} = require('../src/database/models')
 
 
 
