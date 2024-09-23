@@ -2,6 +2,8 @@
 import express,{ Request, Response, NextFunction} from 'express'
 import router from './routes/employee.route'
 import { urlencoded } from 'body-parser';
+const cors = require ('cors')
+
 
 // run and init the database connection
 const {sequelize} = require('../models')
@@ -16,6 +18,11 @@ const port_number = 1337;
 
 app.use(express.json())                 // support json
 app.use(urlencoded({extended:true}));   // support url encoding of params
+//app.use(cors);
+
+app.use(cors({
+  origin: 'http://localhost:5173'  // Allow the Vite frontend
+}));
 
 app.get("/",(req: Request , res: Response) =>
 {
