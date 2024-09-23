@@ -1,0 +1,32 @@
+version: "3"
+services:
+  app:
+    image: my-node-app
+    ports:
+      - "1337:1337" # Match the port your app runs o
+    depends_on:
+      database:
+        condition: service_healthy # Ensure the database service is healthy before starting this service
+    command: >
+      sh -c "cd src && cd Database &&
+      echo 'MIGRATING DATA' &&
+      npx sequelize-cli db:migrate &&
+      npx sequelize-cli db:seed:all && 
+      npm run dev"
+
+  database:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: Louis
+      POSTGRES_DB: crud_db
+    ports:
+      - "5432:5432"  # Optional, if you need to access the DB externally
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U Louis -d crud_db"]  # Check if PostgreSQL is ready to accept connections
+      interval: 10s  # Perform the health check every 10 seconds
+      retries: 5  # Number of consecutive failures before marking the container as unhealthy
+      start_period: 1s  # Grace period before starting health checks
+    
+
+  
