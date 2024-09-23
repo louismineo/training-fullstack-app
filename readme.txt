@@ -55,3 +55,8 @@ POST "/employee" add in employees
 
 
 
+
+// init Database
+ npx sequelize-cli db:migrate
+ npx sequelize-cli db:seed:all
+
