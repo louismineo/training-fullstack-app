@@ -1,13 +1,11 @@
 export const Header = () =>
 {
     return(
-    <header>
-    <h1>Employees</h1>
-    
-    <div>
-        <button>Click here</button>
-    </div>
-        
+    <header style={{"display": "flex" , justifyContent:'space-between',"backgroundColor": "#365271", color:"white", alignItems:'center'}}>
+        <h1 style={{marginLeft:'20px'}}>Employees</h1>
+        <div>
+            <button style={{color : "white", backgroundColor : "green", marginRight:'20px' }}> WIP Add Employee Placeholder</button>
+        </div>
     </header>
     )
 }
