@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react"
 import { EmployeeCard } from "./employeeCard"
 
+import { useAppSelector,useAppDispatch } from '../store/hooks'
+
+import { readEmployeeData } from '../store/employeeActions'
+import { employeesActions } from '../store/employeesSlice'
+
+
 export const EmployeesGrid = () =>
 {
     //store screen state
@@ -19,6 +25,27 @@ export const EmployeesGrid = () =>
         return () => window.removeEventListener('resize', handleResize)
     },[])
 
+
+
+
+
+    // get the dispatch
+    const dispatch = useAppDispatch();
+    useEffect(()=>
+    {
+        console.log('Dispatching action ... readEmployeeData');
+        dispatch(readEmployeeData())
+    },[dispatch])
+
+
+    const employees = useAppSelector((state)=>state.employees.employees);
+    console.log(employees)
+
+
+
+
+
+
     const componentStyle = {
         display:"Grid" ,
         justifyContent: 'space-around',
@@ -27,7 +54,9 @@ export const EmployeesGrid = () =>
         gap: '10px'
     }
 
-    console.log(isDesktop)
+
+
+
     return(
         <div style = {componentStyle}>
             <EmployeeCard/>
