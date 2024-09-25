@@ -1,6 +1,7 @@
 import { Header } from './header'
 import { EmployeesGrid } from './employeesGrid'
 import { Footer } from './footer'
+import Modal from './Modal'
 
 import { uiActions } from '../store/uiSlice'
 import { useEffect } from "react"
@@ -10,13 +11,13 @@ import { readEmployeeData } from '../store/employeeActions'
 export const MainPage = () =>
 {
 
-     // get the dispatch
-     const dispatch = useAppDispatch();
-     useEffect(()=>
-     {
-         console.log('Dispatching action ... readEmployeeData');
-         dispatch(readEmployeeData())
-     },[dispatch])
+    // get the dispatch
+    const dispatch = useAppDispatch();
+    useEffect(()=>
+    {
+        console.log('Dispatching action ... readEmployeeData');
+        dispatch(readEmployeeData())
+    },[dispatch])
 
 
     //effect to handle screen resize

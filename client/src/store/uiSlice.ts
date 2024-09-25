@@ -46,7 +46,7 @@ const uiSlice = createSlice(
             {
                 if((state.curentPageNumber-1) >= state.minPageNumber)
                     state.curentPageNumber--;
-            }
+            },          
         }
     }
 )

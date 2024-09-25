@@ -2,6 +2,8 @@ import {IconButton} from 'rsuite';
 import "rsuite/dist/rsuite.min.css";
 import { Edit,Trash } from '@rsuite/icons'
 import { Employee } from '../store/employeesSlice';
+import Modal from './Modal';
+import { useState } from 'react';
 
 
 type EmployeeCardProps = 
@@ -11,6 +13,27 @@ type EmployeeCardProps =
 
 export const EmployeeCard = ({emp}: EmployeeCardProps)=>
 {
+
+    const [openModal, setOpenModal] = useState(false);
+
+
+    const deleteEmployeeHandler = () =>
+    {
+        console.log(emp.name)
+        setOpenModal(true)
+    }
+
+    const cancelDelete = () =>
+    {
+        setOpenModal(false);
+    }
+
+    const confirmDelete = () =>
+    {
+        alert("DELETE");
+        setOpenModal(false);
+    }
+
     return (
         <div style={
             {
@@ -29,7 +52,8 @@ export const EmployeeCard = ({emp}: EmployeeCardProps)=>
             </div>
             <div style={{"width":"20%",display:"flex",verticalAlign:"center",justifyContent:'right'}}>
                 <IconButton circle icon={<Edit/>} appearance="link" />
-                <IconButton circle icon={<Trash/>} appearance="link" />
+                <IconButton circle icon={<Trash/>} appearance="link" onClick={deleteEmployeeHandler} />
+                <Modal isOpen = {openModal} emp={emp} cancelModalCallback={cancelDelete} confirmModalCallback={confirmDelete}/>
             </div>
         </div>
     )
