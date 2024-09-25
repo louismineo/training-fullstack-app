@@ -49,7 +49,7 @@ export const EmployeesGrid = () =>
 
 
     const current10Employees = getPaginatedData(employeesArray, pageNumber, cardsPerPage);
-    console.log(current10Employees)
+    //console.log(current10Employees)
 
     
 
