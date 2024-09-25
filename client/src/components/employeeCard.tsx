@@ -1,8 +1,15 @@
 import {IconButton} from 'rsuite';
 import "rsuite/dist/rsuite.min.css";
 import { Edit,Trash } from '@rsuite/icons'
+import { Employee } from '../store/employeesSlice';
 
-export const EmployeeCard = ()=>
+
+type EmployeeCardProps = 
+{
+    emp: Employee
+}
+
+export const EmployeeCard = ({emp}: EmployeeCardProps)=>
 {
     return (
         <div style={
@@ -16,9 +23,9 @@ export const EmployeeCard = ()=>
                 justifyContent:'space-between'
             }}>
             <div style = {{"width":"80%", padding: 10}}>
-                <h2>Name</h2>
-                <h3>Dept</h3>
-                <h3>Salary</h3>
+                <h2>{emp.name}</h2>
+                <h3>{emp.department}</h3>
+                <h3>${emp.salary}</h3>
             </div>
             <div style={{"width":"20%",display:"flex",verticalAlign:"center",justifyContent:'right'}}>
                 <IconButton circle icon={<Edit/>} appearance="link" />

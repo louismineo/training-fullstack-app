@@ -6,7 +6,7 @@ export const createEmployeeData = () =>
     alert('unimplemented');
 }
 
-export const readEmployeeData = () =>
+export const readEmployeeData = () => // returns array, not object
 {
     return async (dispatch:any) =>
     {
@@ -18,7 +18,7 @@ export const readEmployeeData = () =>
                 throw Error(response.data);
 
             //converting to json might take a while if too large
-            return response.data;   
+            return response.data['employees'];   
         }
 
         try

@@ -1,20 +1,30 @@
 import { createSlice} from "@reduxjs/toolkit";
 
+export interface Employee
+{
+    uuid:string,
+    name:string,
+    salary:number,
+    department:string
+}
+
 
 interface EmployeesState
 {
-    employees:[],
+    employees:Employee[],
     employeesCount:number 
+}
+
+const initialState :EmployeesState = 
+{
+    employees : [],
+    employeesCount:0
 }
 
 const employeesSlice = createSlice(
     {
         name:'employees',
-        initialState:
-        {
-            employees:[],
-            employeesCount:0
-        },
+        initialState,
         reducers:
         {
             refreshData(state,action)
