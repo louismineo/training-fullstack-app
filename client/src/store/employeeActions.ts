@@ -43,7 +43,28 @@ export const updateEmployeeData = () =>
     alert('unimplemented');
 }
 
-export const deleteEmployeeData = () =>
+export const deleteEmployeeData = (empUUID:string) =>
 {
-    alert('unimplemented');
+    return async (dispatch:any) =>
+        {
+            const deleteEmployeeFromDB = async(empUUID:string) =>
+            {
+                const response = await axios.delete('http://localhost:1337/employee/'+empUUID)
+    
+                if(response.status !== 204)
+                    throw Error(response.data);  
+            }
+    
+            try
+            {
+                await deleteEmployeeFromDB(empUUID);
+                //refresh after deletion
+                readEmployeeData();
+    
+            }
+            catch(e:any)
+            {
+                alert(e.message);
+            }
+        }
 }

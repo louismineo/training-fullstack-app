@@ -3,6 +3,7 @@ import { EmployeeCard } from "./employeeCard"
 import { Employee } from "../store/employeesSlice"
 
 import { useAppSelector } from '../store/hooks'
+import { useEffect } from "react"
 
 
 export const EmployeesGrid = () =>
@@ -20,6 +21,11 @@ export const EmployeesGrid = () =>
     
 
     const employeesArray:Employee[] = useAppSelector((state)=>state.employees.employees);
+
+    useEffect(()=>
+    {
+
+    },[employeesArray])
 
     const pageNumber = useAppSelector((state)=>state.ui.curentPageNumber);
     const cardsPerPage = useAppSelector((state)=>state.ui.maxRecords);

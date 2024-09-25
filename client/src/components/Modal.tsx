@@ -8,7 +8,7 @@ type ModalProps =
     isOpen:boolean;
     emp:Employee;
     cancelModalCallback : ()=> void;
-    confirmModalCallback : ()=> void
+    confirmModalCallback : (uuid:string)=> void
 }
 
 const Modal= ({isOpen,emp,cancelModalCallback,confirmModalCallback}:ModalProps) => {
@@ -25,7 +25,7 @@ const Modal= ({isOpen,emp,cancelModalCallback,confirmModalCallback}:ModalProps) 
             <Button onClick= {cancelModalCallback} color="primary" >
                 Cancel
             </Button>
-            <Button onClick= {confirmModalCallback} color="primary">
+            <Button onClick= {()=>confirmModalCallback(emp.uuid)} color="primary">
                 Confirm
             </Button>
             </DialogActions>

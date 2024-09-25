@@ -4,6 +4,8 @@ import { Edit,Trash } from '@rsuite/icons'
 import { Employee } from '../store/employeesSlice';
 import Modal from './Modal';
 import { useState } from 'react';
+import { deleteEmployeeData } from '../store/employeeActions';
+import { useAppDispatch } from '../store/hooks';
 
 
 type EmployeeCardProps = 
@@ -13,6 +15,7 @@ type EmployeeCardProps =
 
 export const EmployeeCard = ({emp}: EmployeeCardProps)=>
 {
+    const dispatch = useAppDispatch();
 
     const [openModal, setOpenModal] = useState(false);
 
@@ -28,9 +31,10 @@ export const EmployeeCard = ({emp}: EmployeeCardProps)=>
         setOpenModal(false);
     }
 
-    const confirmDelete = () =>
+    const confirmDelete = (empUUID:string) =>
     {
-        alert("DELETE");
+        dispatch(deleteEmployeeData(empUUID))
+        alert(empUUID+"DELETED");
         setOpenModal(false);
     }
 
