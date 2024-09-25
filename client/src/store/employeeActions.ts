@@ -1,10 +1,13 @@
+
 import { employeesActions } from "./employeesSlice";
+import { uiActions } from "./uiSlice";
 import axios from "axios";
 
 export const createEmployeeData = () =>
 {
     alert('unimplemented');
 }
+
 
 export const readEmployeeData = () => // returns array, not object
 {
@@ -24,7 +27,9 @@ export const readEmployeeData = () => // returns array, not object
         try
         {
             const employeeData = await fetchAllEmployeesFromDB();
-            dispatch(employeesActions.refreshData(employeeData))
+            dispatch(employeesActions.refreshData(employeeData));
+            dispatch(uiActions.update(employeeData.length));
+
         }
         catch(e:any)
         {

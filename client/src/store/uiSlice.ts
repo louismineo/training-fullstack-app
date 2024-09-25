@@ -3,20 +3,22 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 //defining a type for the slice state
 interface UiState
 {
+    isDesktop:          boolean,
     maxRecords:         number,
     curentPageNumber:   number,
-    minPageNumber:      number,
-    maxPageNumber:      number
+    minPageNumber:      number, // affected by employee count
+    maxPageNumber:      number  // affected by employee count and self's maxRecords
 }
 
 
 //init the state using that type
 const initialState : UiState =
 {
+    isDesktop: true,
     maxRecords:10,
     curentPageNumber: 1,
     minPageNumber:1,
-    maxPageNumber: 99
+    maxPageNumber: 1
 }
 
 
@@ -26,11 +28,14 @@ const uiSlice = createSlice(
         initialState,  // `createSlice` will infer the state type from the `initialState` argument
         reducers:
         {
-            initialise(state,action : PayloadAction<number>) // Use the PayloadAction type to declare the contents of `action.payload`
+            updateIsDesktop(state,action : PayloadAction<boolean>)
+            {
+                state.isDesktop = action.payload
+            },
+            update(state,action : PayloadAction<number>) // Use the PayloadAction type to declare the contents of `action.payload`
             {
                 //change max page number here
-                state.maxPageNumber = (action.payload / state.maxRecords) + 1;
-
+                state.maxPageNumber = Math.floor(action.payload / state.maxRecords) + 1;
             },
             nextPage(state)
             {
@@ -39,7 +44,7 @@ const uiSlice = createSlice(
             },
             previousPage(state)
             {
-                if((state.curentPageNumber-1) >= state.maxPageNumber)
+                if((state.curentPageNumber-1) >= state.minPageNumber)
                     state.curentPageNumber--;
             }
         }
@@ -47,3 +52,5 @@ const uiSlice = createSlice(
 )
 
 export default uiSlice;
+
+export const uiActions = uiSlice.actions;

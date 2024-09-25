@@ -1,17 +1,42 @@
+import { useAppSelector, useAppDispatch } from "../store/hooks";
+import { useEffect } from "react";
+import { uiActions } from "../store/uiSlice";
+
 export const Footer = () =>
 {
-    const pageNumbern:number = 1;
-    const startRecordNumber:number = 1;
-    const endRecordNumber:number = 10;
-    const totalRecordCount:number = 24;
+    //get the slice data
+    
+    const pageNumber:number = useAppSelector((state)=> state.ui.curentPageNumber);
+    const totalRecordCount:number = useAppSelector((state)=> state.employees.employeesCount);;
+    const startRecordNumber:number = ((pageNumber-1)*10)+1 ;
+    const endRecordNumber:number = ((startRecordNumber + 10)> totalRecordCount )? totalRecordCount : startRecordNumber + 10;
+
+    const isDesktop:boolean = useAppSelector((state)=> state.ui.isDesktop)
+    //dispatch action
+    const dispatch = useAppDispatch();
+    function goPreviousPage()
+    {
+        //console.log("BACK")
+        dispatch(uiActions.previousPage())
+        //console.log(pageNumber);
+    }
+
+    function goNextPage()
+    {
+       //console.log("NEXT")
+        dispatch(uiActions.nextPage())
+        //console.log(pageNumber);
+    }
+
+
 
     return (
         <div style={{display: 'flex',flexDirection:'row',color: 'black',justifyContent : 'space-around'}}>
-            <div style={{width:'20%'}} >Showing {startRecordNumber} - {endRecordNumber} out of {totalRecordCount} entries</div>
+            {isDesktop? <div style={{width:'20%'}} >Showing <strong>{startRecordNumber} - {endRecordNumber}</strong> out of <strong>{totalRecordCount}</strong> entries</div>: <></>}
             <div style={{display:'flex', justifyContent:'space-evenly', width:'10%'}}>
-                <a>Previous</a>
-                <a>{pageNumbern}</a>
-                <a>Next</a>
+                <a onClick={goPreviousPage}><strong>Previous</strong></a>
+                <a><strong>{pageNumber}</strong></a>
+                <a onClick={goNextPage}><strong>Next</strong></a>
             </div>
         </div>
     )

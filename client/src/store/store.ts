@@ -12,7 +12,9 @@ const store = configureStore(
         {
             employees:employeesSlice.reducer,
             ui:uiSlice.reducer
-        }
+        },
+        middleware: (getDefaultMiddleware)=>
+            getDefaultMiddleware()//
     }
 )
 

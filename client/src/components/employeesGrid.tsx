@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+
 import { EmployeeCard } from "./employeeCard"
 import { Employee } from "../store/employeesSlice"
 
@@ -7,9 +7,7 @@ import { useAppSelector } from '../store/hooks'
 
 export const EmployeesGrid = () =>
 {
-
-    //store screen state
-    const [isDesktop , setIsDesktop] = useState<boolean>(window.innerWidth >= 768)
+    const isDesktop:boolean = useAppSelector((state)=>state.ui.isDesktop)
 
     const componentStyle = {
         display:"Grid" ,
@@ -19,18 +17,7 @@ export const EmployeesGrid = () =>
         gap: '10px'
     }
 
-    //effect to handle screen resize
-    useEffect(()=>
-    {
-        const handleResize = () =>
-        {
-            setIsDesktop(window.innerWidth >= 768);
-        }
-
-        window.addEventListener('resize', handleResize);
-
-        return () => window.removeEventListener('resize', handleResize)
-    },[])
+    
 
     const employeesArray:Employee[] = useAppSelector((state)=>state.employees.employees);
 
@@ -64,7 +51,6 @@ export const EmployeesGrid = () =>
                         <EmployeeCard key = {index} emp={emp}/>
                     )
                 })}
-           
         </div>
     )
 }
