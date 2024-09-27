@@ -1,15 +1,19 @@
 import { Header } from './header'
 import { EmployeesGrid } from './employeesGrid'
 import { Footer } from './footer'
-import Modal from './Modal'
+
 
 import { uiActions } from '../store/uiSlice'
 import { useEffect } from "react"
 import { useAppDispatch } from '../store/hooks'
 import { readEmployeeData } from '../store/employeeActions'
+import { useNavigate } from 'react-router-dom';
+
 
 export const MainPage = () =>
 {
+
+    const navigate = useNavigate();
 
     // get the dispatch
     const dispatch = useAppDispatch();
@@ -33,9 +37,14 @@ export const MainPage = () =>
         return () => window.removeEventListener('resize', handleResize)
     },[dispatch])
 
+    const GoToAdd = () =>{
+        navigate(`/addEdit`,{});
+    }
+
+
     return(
         <div style={{display:'flex', justifyContent:'center', flexDirection:'column'}}>
-            <Header/>
+            <Header headerText='Employees' buttonText='Add Employees' buttonCallback={GoToAdd}/>
             <EmployeesGrid/>
             <Footer/>
         </div>

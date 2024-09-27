@@ -6,6 +6,7 @@ import Modal from './Modal';
 import { useState } from 'react';
 import { deleteEmployeeData } from '../store/employeeActions';
 import { useAppDispatch } from '../store/hooks';
+import { useNavigate } from 'react-router-dom';
 
 
 type EmployeeCardProps = 
@@ -13,12 +14,20 @@ type EmployeeCardProps =
     emp: Employee
 }
 
+
+
 export const EmployeeCard = ({emp}: EmployeeCardProps)=>
 {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const [openModal, setOpenModal] = useState(false);
 
+    const editEmployeeHandler = (emp:Employee) =>
+    {
+        console.log("EDITTING "+emp.name)
+        navigate(`/addEdit/${emp.uuid}`, {state:emp})
+    }
 
     const deleteEmployeeHandler = () =>
     {
@@ -55,7 +64,7 @@ export const EmployeeCard = ({emp}: EmployeeCardProps)=>
                 <h3>${emp.salary}</h3>
             </div>
             <div style={{"width":"20%",display:"flex",verticalAlign:"center",justifyContent:'right'}}>
-                <IconButton circle icon={<Edit/>} appearance="link" />
+                <IconButton circle icon={<Edit/>} appearance="link" onClick = {()=>editEmployeeHandler(emp)}/>
                 <IconButton circle icon={<Trash/>} appearance="link" onClick={deleteEmployeeHandler} />
                 <Modal isOpen = {openModal} emp={emp} cancelModalCallback={cancelDelete} confirmModalCallback={confirmDelete}/>
             </div>
