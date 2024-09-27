@@ -181,30 +181,6 @@ module.exports = {
         department: "PS",
         createdAt:'2024-09-11 14:18:28.499+08',
         updatedAt:'2024-09-11 14:18:28.499+08'
-    },
-    {
-        uuid: "394e5ca8-cced-4785-b2bf-6fd0d9ae593c",
-        name: "Victor",
-        salary: 4111,
-        department: "HR",
-        createdAt:'2024-09-11 14:18:28.499+08',
-        updatedAt:'2024-09-11 14:18:28.499+08'
-    },
-    {
-        uuid: "0649c9c2-69ac-40f0-90d9-82cb3a60ccfa",
-        name: "Wendy",
-        salary: 5222,
-        department: "PS",
-        createdAt:'2024-09-11 14:18:28.499+08',
-        updatedAt:'2024-09-11 14:18:28.499+08'
-    },
-    {
-        uuid: "26eacd93-c1b7-4171-ad88-623cdd5394aa",
-        name: "Xander",
-        salary: 6333,
-        department: "HR",
-        createdAt:'2024-09-11 14:18:28.499+08',
-        updatedAt:'2024-09-11 14:18:28.499+08'
     }
     ], {});
 

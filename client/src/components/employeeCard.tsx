@@ -66,7 +66,7 @@ export const EmployeeCard = ({emp}: EmployeeCardProps)=>
             </div>
             <div style={{"width":"20%",display:"flex",verticalAlign:"center",justifyContent:'right'}}>
                 <IconButton circle icon={<Edit/>} appearance="link" onClick = {()=>editEmployeeHandler(emp)}/>
-                <IconButton circle icon={<Trash/>} appearance="link" onClick={()=>deleteEmployeeHandler} />
+                <IconButton circle icon={<Trash/>} appearance="link" onClick={deleteEmployeeHandler} />
                 <Modal isOpen = {openModal} emp={emp} cancelModalCallback={cancelDelete} confirmModalCallback={confirmDelete}/>
             </div>
         </div>
