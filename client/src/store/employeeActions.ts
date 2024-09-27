@@ -93,7 +93,7 @@ export const updateEmployeeData = (empUUID:string, empName:string, empSalary:num
             {
                 await updateEmployeeInDB(empUUID, empName, empSalary, empDepartment);
                 //refresh after deletion
-                readEmployeeData();
+                dispatch(readEmployeeData());
     
             }
             catch(e:any)
@@ -119,7 +119,7 @@ export const deleteEmployeeData = (empUUID:string) =>
             {
                 await deleteEmployeeFromDB(empUUID);
                 //refresh after deletion
-                readEmployeeData();
+                dispatch(readEmployeeData());
     
             }
             catch(e:any)

@@ -130,6 +130,7 @@ export const EmployeeForm = ({isAdd, employee}:EmployeeFormProp) =>
                 console.log(formData)
             }
 
+            alert(isAdd? formData.name + " has been added": employee.uuid + " has been edited.")
             //upon success, no erorrs thrown, go back to main page
             navigate('/',{});
         }

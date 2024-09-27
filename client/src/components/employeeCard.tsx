@@ -5,7 +5,7 @@ import { Employee } from '../store/employeesSlice';
 import Modal from './Modal';
 import { useState } from 'react';
 import { deleteEmployeeData } from '../store/employeeActions';
-import { useAppDispatch } from '../store/hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -40,12 +40,14 @@ export const EmployeeCard = ({emp}: EmployeeCardProps)=>
         setOpenModal(false);
     }
 
-    const confirmDelete = (empUUID:string) =>
+    const confirmDelete = (emp:Employee) =>
     {
-        dispatch(deleteEmployeeData(empUUID))
-        alert(empUUID+"DELETED");
+        dispatch(deleteEmployeeData(emp.uuid))
+        alert(emp.name+" has been deleted.");
         setOpenModal(false);
-        window.location.reload();
+        //window.location.reload();
+
+
     }
 
     return (

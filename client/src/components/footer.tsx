@@ -8,8 +8,8 @@ export const Footer = () =>
     
     const pageNumber:number = useAppSelector((state)=> state.ui.curentPageNumber);
     const totalRecordCount:number = useAppSelector((state)=> state.employees.employeesCount);;
-    const startRecordNumber:number = ((pageNumber-1)*10)+1 ;
-    const endRecordNumber:number = ((startRecordNumber + 10)> totalRecordCount )? totalRecordCount : startRecordNumber + 10;
+    const startRecordNumber:number = totalRecordCount===0?0:(((pageNumber-1)*10)+1) ;
+    const endRecordNumber:number = ((startRecordNumber + 9)> totalRecordCount )? totalRecordCount : startRecordNumber + 9;
 
     const isDesktop:boolean = useAppSelector((state)=> state.ui.isDesktop)
     //dispatch action

@@ -35,7 +35,19 @@ const uiSlice = createSlice(
             update(state,action : PayloadAction<number>) // Use the PayloadAction type to declare the contents of `action.payload`
             {
                 //change max page number here
-                state.maxPageNumber = Math.floor(action.payload / state.maxRecords) + 1;
+                if((action.payload % state.maxRecords) === 0) 
+                {
+                    // the change page
+                    state.maxPageNumber = Math.floor(action.payload / state.maxRecords);
+                    if(state.curentPageNumber  > state.maxPageNumber )
+                    {
+                        state.curentPageNumber = state.maxPageNumber
+                    }
+                }
+                else
+                {
+                    state.maxPageNumber = Math.floor(action.payload / state.maxRecords) + 1;
+                }
             },
             nextPage(state)
             {
