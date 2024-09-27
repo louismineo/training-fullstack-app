@@ -3,9 +3,39 @@ import { employeesActions } from "./employeesSlice";
 import { uiActions } from "./uiSlice";
 import axios from "axios";
 
-export const createEmployeeData = () =>
+export const createEmployeeData = (empName:string, empSalary:number, empDepartment:string) =>
 {
-    alert('unimplemented');
+    return async (dispatch:any) =>
+        {
+            const createEmployeeInDB = async(empName:string, empSalary:number, empDepartment:string ) =>
+            {
+
+                const employeeData = 
+                {
+                    "name" : empName,
+                    "salary": empSalary,
+                    "department": empDepartment
+                }
+
+                const response = await axios.post('http://localhost:1337/employee', employeeData
+                )
+    
+                if(response.status !== 200)
+                    throw Error(response.data);  
+            }
+    
+            try
+            {
+                await createEmployeeInDB(empName, empSalary, empDepartment);
+                //refresh after deletion
+                readEmployeeData();
+    
+            }
+            catch(e:any)
+            {
+                alert(e.message);
+            }
+        }
 }
 
 
@@ -38,9 +68,39 @@ export const readEmployeeData = () => // returns array, not object
     }
 }
 
-export const updateEmployeeData = () =>
+export const updateEmployeeData = (empUUID:string, empName:string, empSalary:number, empDepartment:string ) =>
 {
-    alert('unimplemented');
+    return async (dispatch:any) =>
+        {
+            const updateEmployeeInDB = async(empUUID:string, empName:string, empSalary:number, empDepartment:string ) =>
+            {
+
+                const employeeData = 
+                {
+                    "name" : empName,
+                    "salary": empSalary,
+                    "department": empDepartment
+                }
+
+                const response = await axios.put('http://localhost:1337/employee/'+empUUID, employeeData
+                )
+    
+                if(response.status !== 200)
+                    throw Error(response.data);  
+            }
+    
+            try
+            {
+                await updateEmployeeInDB(empUUID, empName, empSalary, empDepartment);
+                //refresh after deletion
+                readEmployeeData();
+    
+            }
+            catch(e:any)
+            {
+                alert(e.message);
+            }
+        }
 }
 
 export const deleteEmployeeData = (empUUID:string) =>
