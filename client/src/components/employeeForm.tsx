@@ -1,4 +1,4 @@
-import { TextField, MenuItem, Select, FormControl, InputLabel, Button, SelectChangeEvent } from '@mui/material';
+import { TextField, MenuItem, Select, FormControl, InputLabel, Button, SelectChangeEvent, FormHelperText } from '@mui/material';
 import { createEmployeeData, updateEmployeeData } from '../store/employeeActions';
 import { useAppDispatch } from '../store/hooks';
 import { ChangeEvent, FormEvent, useState } from 'react';
@@ -27,15 +27,95 @@ export const EmployeeForm = ({isAdd, employee}:EmployeeFormProp) =>
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
+
+    const [formErrorData, setFormErrorData] = useState({
+        name: '',
+        salary: '',
+        department: ''
+    });
+
+    const validateName = (input:string)=>
+    {
+        if(input.length <4 || input.length >30 )
+            return 'Name must be 4 to 30 characters.'
+        else
+            return '';
+    }
+
+    const validateSalary = (input:number)=>
+    {
+        if (input < 0)
+            return 'Salary cannot be negative'
+        else 
+            return '';
+    }
+
+    const validateDepartment = (input:string)=>
+    {
+        if (input === '')
+            return 'Department cannot be empty'
+        else 
+            return '';
+    }
+
     const [formData, setFormData] = useState({
         name: employee.name,
         salary: employee.salary,
         department: employee.department
     });
 
+    const handleChange = (e:ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>) => {
+        const { name, value } = e.target;
+
+        // if the name of the form input element is "salary", convert the value to a number
+        const newValue = name === 'salary' ? Number(value):value;       
+        
+        setFormData({
+            ...formData,
+            [name]: newValue
+        });
+
+
+        switch(name)
+        {
+            case 'name':
+                setFormErrorData({...formErrorData, name:validateName(String(newValue))})
+                break;
+            case 'salary':
+                setFormErrorData({...formErrorData, salary:validateSalary(Number(newValue))})
+                break;
+            case 'department':
+                setFormErrorData({...formErrorData, department:validateDepartment(String(newValue))})
+                break;
+            default:
+                break;
+        }
+        
+    };
+
     const submitHandler = (e : FormEvent) =>
     {
         e.preventDefault();
+
+        const nameError = validateName(formData.name);
+        const salaryError = validateSalary(formData.salary);
+        const departmentError = validateDepartment(formData.department);
+        
+        console.log("name:"+!!nameError);
+        console.log("salary"+!!salaryError);
+        console.log("dept"+!!departmentError);
+
+        if(nameError !=='' || salaryError !=='' || departmentError !=='')
+        {
+            setFormErrorData(
+                {
+                    name: nameError,
+                    salary: salaryError,
+                    department : departmentError
+                }
+            )
+            return;
+        }
 
         try 
         {
@@ -59,17 +139,8 @@ export const EmployeeForm = ({isAdd, employee}:EmployeeFormProp) =>
         }
     }
 
-    const handleChange = (e:ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>) => {
-        const { name, value } = e.target;
+    
 
-        // if the name of the form input element is "salary", convert the value to a number
-        const newValue = name === 'salary' ? Number(value):value;       
-        
-        setFormData({
-            ...formData,
-            [name]: newValue
-        });
-    };
 
     return(
         <form>
@@ -80,6 +151,8 @@ export const EmployeeForm = ({isAdd, employee}:EmployeeFormProp) =>
                     value={formData.name}
                     onChange={handleChange}
                     fullWidth
+                    error = {!!formErrorData.name}
+                    helperText = {formErrorData.name}
                     margin="normal"
                     variant="outlined"
 
@@ -94,13 +167,15 @@ export const EmployeeForm = ({isAdd, employee}:EmployeeFormProp) =>
                     value={formData.salary}
                     onChange={handleChange}
                     fullWidth
+                    error = {!!formErrorData.salary}
+                    helperText = {formErrorData.salary}
                     margin="normal"
                     variant="outlined"
                 required
                 />
 
             {/* Department Select */}
-            <FormControl fullWidth margin="normal">
+            <FormControl fullWidth error = {!!formErrorData.department} margin="normal">
                 <InputLabel id="department-label">Department</InputLabel>
                 <Select
                     labelId="department-label"
@@ -114,6 +189,7 @@ export const EmployeeForm = ({isAdd, employee}:EmployeeFormProp) =>
                     <MenuItem value="PS">PS</MenuItem>
                     <MenuItem value="HR">HR</MenuItem>
                 </Select>
+                <FormHelperText>{formErrorData.department}</FormHelperText>
             </FormControl>
 
             {/* Submit Button */}
