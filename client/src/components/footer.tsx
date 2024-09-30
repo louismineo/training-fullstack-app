@@ -31,7 +31,7 @@ export const Footer = () =>
 
 
     return (
-        <div style={{display: 'flex',flexDirection:'row',color: 'black',justifyContent : 'space-around'}}>
+        <div style={{height:'5%', display: 'flex',flexDirection:'row',color: 'black',justifyContent : 'space-around'}}>
             {isDesktop? <div style={{width:'20%'}} >Showing <strong>{startRecordNumber} - {endRecordNumber}</strong> out of <strong>{totalRecordCount}</strong> entries</div>: <></>}
             <div style={{display:'flex', justifyContent:'space-evenly', width:'10%'}}>
                 <a onClick={goPreviousPage}><strong>Previous</strong></a>

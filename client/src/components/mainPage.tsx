@@ -43,7 +43,7 @@ export const MainPage = () =>
 
 
     return(
-        <div style={{display:'flex', justifyContent:'center', flexDirection:'column'}}>
+        <div style={{height :'100vh',display:'flex', flexDirection:'column'}}>
             <Header headerText='Employees' buttonText='Add Employees' buttonCallback={GoToAdd}/>
             <EmployeesGrid/>
             <Footer/>

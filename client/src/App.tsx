@@ -11,6 +11,12 @@ function App() {
 
 {console.log("App is running")}
 
+window.addEventListener('resize', () => {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  console.log(`Updated Width: ${width}, Updated Height: ${height}`);
+});
+
 return(
   <BrowserRouter>
     <Routes>

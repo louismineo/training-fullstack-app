@@ -12,10 +12,12 @@ export const EmployeesGrid = () =>
 
     const componentStyle = {
         display:"Grid" ,
-        justifyContent: 'space-around',
+        height : '85%',
+        justifyContent: 'center',
+        alignItems: 'center',
         gridTemplateColumns: `repeat(${isDesktop ? 2 : 1}, 1fr)`,
         gridTemplateRows: `repeat(${isDesktop ? 5 : 10}, 1fr)`,
-        gap: '10px'
+        gap: '0%'
     }
 
     
@@ -50,7 +52,15 @@ export const EmployeesGrid = () =>
 
 
     return(
-        <div style = {componentStyle}>
+        <div style = {{
+            display:"Grid" ,
+            height : '85%',
+            justifyItems:'center',
+            alignItems: 'center',
+            gridTemplateColumns: `repeat(${isDesktop ? 2 : 1}, 1fr)`,
+            gridTemplateRows: `repeat(${isDesktop ? 5 : 10}, 1fr)`,
+            gap: '0%'
+        }}>
             {current10Employees.map((emp,index) =>
                 {
                     return(

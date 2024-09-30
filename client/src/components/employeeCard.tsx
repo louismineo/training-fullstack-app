@@ -15,9 +15,10 @@ type EmployeeCardProps =
 }
 
 
-
 export const EmployeeCard = ({emp}: EmployeeCardProps)=>
 {
+
+
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -53,22 +54,22 @@ export const EmployeeCard = ({emp}: EmployeeCardProps)=>
     return (
         <div style={
             {
-                "width":"100%",
-                "height":"150px",
+                width:"80%",
+                height:'80%',
                 backgroundColor : '#EAEAEA',
                 display: "flex",
                 flexDirection: "row",
                 alignItems:"center",
                 justifyContent:'space-between'
             }}>
-            <div style = {{"width":"80%", padding: 10}}>
-                <h2>{emp.name}</h2>
-                <h3>{emp.department}</h3>
-                <h3>${emp.salary}</h3>
+            <div style = {{width:"80%",height:'100%', padding: 10, display: 'flex', flexDirection:'column',justifyContent:'center'}}>
+                <div style= {{color:'#375270', fontSize: 'calc(0.04* 100vh)', fontWeight:'bolder'}}>{emp.name}</div>
+                <div style= {{color:'#375270', fontSize:'calc(0.03* 100vh)',}}>{emp.department}</div>
+                <div style= {{color:'#375270',fontSize:'calc(0.03* 100vh)',}}>${emp.salary.toLocaleString()}</div>
             </div>
-            <div style={{"width":"20%",display:"flex",verticalAlign:"center",justifyContent:'right'}}>
-                <IconButton circle icon={<Edit/>} appearance="link" onClick = {()=>editEmployeeHandler(emp)}/>
-                <IconButton circle icon={<Trash/>} appearance="link" onClick={deleteEmployeeHandler} />
+            <div style={{width:"20%",display:"flex",verticalAlign:"center",justifyContent:'right'}}>
+                <IconButton circle icon={<Edit/>} color="orange" appearance="link" onClick = {()=>editEmployeeHandler(emp)}/>
+                <IconButton circle icon={<Trash/>} color="red" appearance="link" onClick={deleteEmployeeHandler} />
                 <Modal isOpen = {openModal} emp={emp} cancelModalCallback={cancelDelete} confirmModalCallback={confirmDelete}/>
             </div>
         </div>
