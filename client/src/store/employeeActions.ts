@@ -58,7 +58,7 @@ export const readEmployeeData = () => // returns array, not object
         {
             const employeeData = await fetchAllEmployeesFromDB();
             dispatch(employeesActions.refreshData(employeeData));
-            dispatch(uiActions.update(employeeData.length));
+            dispatch(uiActions.updatePage(employeeData.length));
 
         }
         catch(e:any)

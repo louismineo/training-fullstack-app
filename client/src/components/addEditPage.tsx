@@ -1,17 +1,21 @@
 import {Header} from './header'
 import { employee, EmployeeForm } from './employeeForm'
 import { useParams, useLocation } from 'react-router-dom';
+import { useAppDispatch } from '../store/hooks';
+import { uiActions } from '../store/uiSlice';
+import { userStates } from '../store/uiSlice';
 import { useNavigate } from 'react-router-dom';
-
-
 
 
 export const AddEditPage = () =>
 {
+    const dispatch = useAppDispatch();
+
     const navigate = useNavigate();
 
-    const GoBackToMain = ()=>{
-        
+    const GoBackToMain = ()=>
+    {  
+        dispatch(uiActions.updateUserState(userStates.isView))
         navigate(`/`,{});
     }
 

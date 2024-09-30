@@ -1,4 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { act } from "react";
+
+export enum userStates
+{
+    isView,
+    isAdd,
+    isEdit,
+}
+
 
 //defining a type for the slice state
 interface UiState
@@ -8,6 +17,7 @@ interface UiState
     curentPageNumber:   number,
     minPageNumber:      number, // affected by employee count
     maxPageNumber:      number  // affected by employee count and self's maxRecords
+    currentUserState:   userStates
 }
 
 
@@ -18,7 +28,9 @@ const initialState : UiState =
     maxRecords:10,
     curentPageNumber: 1,
     minPageNumber:1,
-    maxPageNumber: 1
+    maxPageNumber: 1,
+    currentUserState : userStates.isView
+
 }
 
 
@@ -32,7 +44,11 @@ const uiSlice = createSlice(
             {
                 state.isDesktop = action.payload
             },
-            update(state,action : PayloadAction<number>) // Use the PayloadAction type to declare the contents of `action.payload`
+            updateUserState(state,action : PayloadAction<userStates>)
+            {
+                state.currentUserState = action.payload
+            },
+            updatePage(state,action : PayloadAction<number>) // Use the PayloadAction type to declare the contents of `action.payload`
             {
                 //change max page number here
                 if((action.payload % state.maxRecords) === 0) 

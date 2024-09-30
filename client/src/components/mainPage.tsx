@@ -3,7 +3,7 @@ import { EmployeesGrid } from './employeesGrid'
 import { Footer } from './footer'
 
 
-import { uiActions } from '../store/uiSlice'
+import { uiActions,userStates } from '../store/uiSlice'
 import { useEffect } from "react"
 import { useAppDispatch } from '../store/hooks'
 import { readEmployeeData } from '../store/employeeActions'
@@ -38,6 +38,7 @@ export const MainPage = () =>
     },[dispatch])
 
     const GoToAdd = () =>{
+        dispatch(uiActions.updateUserState(userStates.isAdd))
         navigate(`/addEdit`,{});
     }
 

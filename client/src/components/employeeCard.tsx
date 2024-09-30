@@ -1,12 +1,17 @@
-import {IconButton} from 'rsuite';
-import "rsuite/dist/rsuite.min.css";
-import { Edit,Trash } from '@rsuite/icons'
+
 import { Employee } from '../store/employeesSlice';
 import Modal from './Modal';
 import { useState } from 'react';
 import { deleteEmployeeData } from '../store/employeeActions';
+import { uiActions,userStates } from '../store/uiSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { useNavigate } from 'react-router-dom';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPencil,  faTrash} from "@fortawesome/free-solid-svg-icons"
+
+import {IconButton} from 'rsuite';
+import "rsuite/dist/rsuite.min.css";
 
 
 type EmployeeCardProps = 
@@ -27,6 +32,7 @@ export const EmployeeCard = ({emp}: EmployeeCardProps)=>
     const editEmployeeHandler = (emp:Employee) =>
     {
         console.log("EDITTING "+emp.name)
+        dispatch(uiActions.updateUserState(userStates.isEdit))
         navigate(`/addEdit/${emp.uuid}`, {state:emp})
     }
 
@@ -68,8 +74,8 @@ export const EmployeeCard = ({emp}: EmployeeCardProps)=>
                 <div style= {{color:'#375270',fontSize:'calc(0.03* 100vh)',}}>${emp.salary.toLocaleString()}</div>
             </div>
             <div style={{width:"20%",display:"flex",verticalAlign:"center",justifyContent:'right'}}>
-                <IconButton circle icon={<Edit/>} color="orange" appearance="link" onClick = {()=>editEmployeeHandler(emp)}/>
-                <IconButton circle icon={<Trash/>} color="red" appearance="link" onClick={deleteEmployeeHandler} />
+                <IconButton circle icon={<FontAwesomeIcon icon = {faPencil}/>} color="orange" appearance="link" onClick = {()=>editEmployeeHandler(emp)}/>
+                <IconButton circle icon={<FontAwesomeIcon icon = {faTrash}/>} color="red" appearance="link" onClick={deleteEmployeeHandler} />
                 <Modal isOpen = {openModal} emp={emp} cancelModalCallback={cancelDelete} confirmModalCallback={confirmDelete}/>
             </div>
         </div>
