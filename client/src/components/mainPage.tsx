@@ -23,20 +23,6 @@ export const MainPage = () =>
         dispatch(readEmployeeData())
     },[dispatch])
 
-
-    //effect to handle screen resize
-    useEffect(()=>
-    {
-        const handleResize = () =>
-        {
-            dispatch(uiActions.updateIsDesktop((window.innerWidth >= 768)));
-        }
-
-        window.addEventListener('resize', handleResize);
-
-        return () => window.removeEventListener('resize', handleResize)
-    },[dispatch])
-
     const GoToAdd = () =>{
         dispatch(uiActions.updateUserState(userStates.isAdd))
         navigate(`/addEdit`,{});

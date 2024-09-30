@@ -13,6 +13,7 @@ export enum userStates
 interface UiState
 {
     isDesktop:          boolean,
+    isWidescreen:       boolean,
     maxRecords:         number,
     curentPageNumber:   number,
     minPageNumber:      number, // affected by employee count
@@ -25,6 +26,7 @@ interface UiState
 const initialState : UiState =
 {
     isDesktop: true,
+    isWidescreen : false,
     maxRecords:10,
     curentPageNumber: 1,
     minPageNumber:1,
@@ -43,6 +45,10 @@ const uiSlice = createSlice(
             updateIsDesktop(state,action : PayloadAction<boolean>)
             {
                 state.isDesktop = action.payload
+            },
+            updateIsWidescreen(state,action : PayloadAction<boolean>)
+            {
+                state.isWidescreen = action.payload
             },
             updateUserState(state,action : PayloadAction<userStates>)
             {

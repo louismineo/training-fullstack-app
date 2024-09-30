@@ -2,6 +2,20 @@ import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { useEffect } from "react";
 import { uiActions } from "../store/uiSlice";
 
+
+const invisibleButtonStyle = 
+{
+    backgroundColor : 'none!important',
+    border:'none',
+    color: 'blue',
+    textDecoration : 'underline',
+
+    padding: '0!important',
+    cursor : 'pointer',
+    display: 'inline'
+}
+
+
 export const Footer = () =>
 {
     //get the slice data
@@ -34,9 +48,9 @@ export const Footer = () =>
         <div style={{height:'5%', display: 'flex',flexDirection:'row',color: 'black',justifyContent : isDesktop? 'space-between' : 'center', marginLeft : isDesktop? '5%' : '0%', marginRight : isDesktop?'5%':'0%'}}>
             {isDesktop? <div style={{width:'20%'}} >Showing <strong>{startRecordNumber} - {endRecordNumber}</strong> out of <strong>{totalRecordCount}</strong> entries</div>: <></>}
             <div style={{display:'flex', justifyContent:'space-between', width:'10%'}}>
-                <a onClick={goPreviousPage}><strong>Previous</strong></a>
-                <a><strong>{pageNumber}</strong></a>
-                <a onClick={goNextPage}><strong>Next</strong></a>
+                <button style = {invisibleButtonStyle} onClick={goPreviousPage}><strong>Previous</strong></button>
+                <button style = {invisibleButtonStyle} ><strong>{pageNumber}</strong></button>
+                <button style = {invisibleButtonStyle} onClick={goNextPage}><strong>Next</strong></button>
             </div>
         </div>
     )
