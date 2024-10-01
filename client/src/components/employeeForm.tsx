@@ -3,6 +3,7 @@ import { createEmployeeData, updateEmployeeData } from '../store/employeeActions
 import { useAppDispatch } from '../store/hooks';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { uiActions,userStates } from '../store/uiSlice';
 
 export type employee = 
 {
@@ -132,6 +133,7 @@ export const EmployeeForm = ({isAdd, employee}:EmployeeFormProp) =>
 
             alert(isAdd? formData.name + " has been added": employee.uuid + " has been edited.")
             //upon success, no erorrs thrown, go back to main page
+            dispatch(uiActions.updateUserState(userStates.isView))
             navigate('/',{});
         }
         catch(e:any)

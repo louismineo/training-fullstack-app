@@ -31,6 +31,9 @@ useEffect(()=>
           dispatch(uiActions.updateIsWidescreen(((window.innerWidth / window.innerHeight) >= (2.1))));
       }
 
+      // to let it run on mount
+      handleResize();
+
       window.addEventListener('resize', handleResize);
 
       return () => window.removeEventListener('resize', handleResize)

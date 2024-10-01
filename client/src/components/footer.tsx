@@ -71,7 +71,7 @@ export const Footer = () =>
     return (
         <div style={{height:'5%', display: 'flex',flexDirection:'row',color: 'black',justifyContent : isDesktop? 'space-between' : 'center', marginLeft : isDesktop? '5%' : '0%', marginRight : isDesktop?'5%':'0%'}}>
             {isDesktop? <div style={{width:'20%'}} >Showing <strong>{startRecordNumber} - {endRecordNumber}</strong> out of <strong>{totalRecordCount}</strong> entries</div>: <></>}
-            <div style={{display:'flex', justifyContent:'space-between', width:'10%'}}>
+            <div style={{display:'flex', justifyContent:'space-between', width:'auto'}}>
                 <button style = 
                     {
                     !prevPageDisable? 
