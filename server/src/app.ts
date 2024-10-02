@@ -34,7 +34,6 @@ app.use('/',router);
 
 app.listen(port_number, async ()=>{
     console.log("Application listening at http://localhost:"+port_number);
-    //console.log(getAllEmployees()); // typeof object
     checkDatabaseConnection();
     //await sequelize.sync({force:true});
     
